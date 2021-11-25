@@ -1,9 +1,8 @@
-import React, {ChangeEventHandler} from "react";
+import React from "react";
 import s from './Dialogs.module.css';
 import {DialogsItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {ActionsTypes, InitialStateType, sendMessageA, updateMessageA} from "../../redux/dialogsReducer";
-
 
 
 type DialogsPagePropsType = {
@@ -12,16 +11,16 @@ type DialogsPagePropsType = {
 }
 
 
-const Dialogs = (props:DialogsPagePropsType) => {
+const Dialogs = ({dialogsPage,...props}:DialogsPagePropsType) => {
 
-    const DialogsElement = props.dialogsPage.dialogs.map(el =>
+    const DialogsElement = dialogsPage.dialogs.map(el =>
         <DialogsItem id={el.id} name={el.name}/>
     )
 
-    const MessageElement = props.dialogsPage.messages.map(mes =>
+    const MessageElement = dialogsPage.messages.map(mes =>
         < Message id={mes.id} message={mes.message}/>
     )
-    const newMessageBody = props.dialogsPage.newMessageBody
+    const newMessageBody =dialogsPage.newMessageBody
     const onSendMessageClick = () => {
         props.dispatch(sendMessageA())
     }
