@@ -1,25 +1,24 @@
 import React from 'react';
-import Post, {postsType} from "./Post/Post";
 import {addPostA, changePostA} from "../../../redux/profileReducer";
 import MyPosts from "./MyPosts";
+import {Store} from "redux";
+import {AllActionsCreatorType, RootReducerType} from "../../../redux/redux-store";
 
 export type MyPostsContanierPropsType = {
-    posts: Array<postsType>
-    newPostText: string
-    dispatch: any
+    store:Store<RootReducerType, AllActionsCreatorType>
 }
 
 const MyPostsContainer = (props:MyPostsContanierPropsType) => {
 
     const addPostText = () => {
-        props.dispatch(addPostA())
+        props.store.dispatch(addPostA())
     }
     const onChangeHandler = (newText:string) => {
-        props.dispatch(changePostA(newText!))
+        props.store.dispatch(changePostA(newText!))
     }
 
     return (
-        <MyPosts posts={props.posts} newPostText={props.newPostText} updateNewPostText={onChangeHandler} addPost={addPostText}/>
+        <MyPosts posts={props.store.getState().profilePage.posts} newPostText={props.store.getState().profilePage.newPostText} updateNewPostText={onChangeHandler} addPost={addPostText}/>
     )
 }
 

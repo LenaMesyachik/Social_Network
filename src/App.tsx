@@ -7,6 +7,7 @@ import Dialogs from "./Components/Dialogs/Dialogs";
 import {Route} from "react-router-dom";
 import {AllActionsCreatorType, RootReducerType} from "./redux/redux-store";
 import {Store} from "redux";
+import DialogsContainer from "./Components/Dialogs/DialogsContanier";
 
 export type AppPropsType = {
     store: Store<RootReducerType, AllActionsCreatorType>
@@ -23,10 +24,8 @@ export const App: React.FC<AppPropsType> = (props) => {
             <Navbar/>
             <div className='app-wrapper-content'>
                 <Route path='/dialogs'
-                       render={() => <Dialogs dialogsPage={props.store.getState().dialogsPage}
-                                              dispatch={props.store.dispatch.bind(props.store)}/>}/>
-                <Route path='/profile' render={() => <Profile profilePage={props.store.getState().profilePage}
-                                                              dispatch={props.store.dispatch.bind(props.store)}
+                       render={() => <DialogsContainer store={props.store}/>}/>
+                <Route path='/profile' render={() => <Profile store={props.store}
                 />}/>
             </div>
         </div>

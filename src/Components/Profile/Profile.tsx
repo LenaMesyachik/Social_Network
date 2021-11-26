@@ -1,24 +1,24 @@
 import React from 'react';
-import MyPosts from "./MyPosts/MyPosts";
 import {ProfileInfo} from "../ProfileInfo/ProfileInfo";
-import {InitialStateType} from "../../redux/profileReducer";
-import {AllActionsCreatorType} from "../../redux/redux-store";
+import {AllActionsCreatorType, RootReducerType} from "../../redux/redux-store";
 import MyPostsContainer from "./MyPosts/MyPostsContanier";
+import {Store} from "redux";
 
 
 type ProfilePagePropsType = {
-    profilePage:InitialStateType,
-    dispatch:(action:AllActionsCreatorType)=>void
-
+    /*profilePage:InitialStateType,
+    dispatch:(action:AllActionsCreatorType)=>void*/
+store:Store<RootReducerType, AllActionsCreatorType>
 }
 const Profile = (props: ProfilePagePropsType) => {
 
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer posts={props.profilePage.posts}
+            <MyPostsContainer store={props.store}
+            /*    posts={props.profilePage.posts}
                      newPostText={props.profilePage.newPostText}
-                     dispatch={props.dispatch}
+                     dispatch={props.dispatch}*/
             />
         </div>
     )

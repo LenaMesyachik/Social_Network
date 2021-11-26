@@ -2,12 +2,14 @@ import React from "react";
 import s from './Dialogs.module.css';
 import {DialogsItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {ActionsTypes, InitialStateType, sendMessageA, updateMessageA} from "../../redux/dialogsReducer";
+import {InitialStateType} from "../../redux/dialogsReducer";
 
 
 type DialogsPagePropsType = {
     dialogsPage: InitialStateType
-    dispatch: (action: ActionsTypes) => void
+    sendNewMessage:()=>void
+    updateMessageBody:(body:string)=>void
+
 }
 
 
@@ -22,12 +24,14 @@ const Dialogs = ({dialogsPage, ...props}: DialogsPagePropsType) => {
     )
     const newMessageBody = dialogsPage.newMessageBody
     const onSendMessageClick = () => {
-        props.dispatch(sendMessageA())
+       /* props.dispatch(sendMessageA())*/
+       props.sendNewMessage()
     }
     const newPostRef = React.createRef<HTMLTextAreaElement>()
     const onNewMessageChange = () => {
         const body = newPostRef.current ? newPostRef.current.value : ''
-        props.dispatch(updateMessageA(body))
+       /* props.dispatch(updateMessageA(body))*/
+        props.updateMessageBody(body)
     }
     return (
         <div className={s.dialogs}>
