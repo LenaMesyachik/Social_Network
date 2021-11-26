@@ -1,12 +1,12 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from './MyPosts.module.css';
 import Post, {postsType} from "./Post/Post";
-import {addPostA, changePostA} from "../../../redux/profileReducer";
 
 export type profilePagePropsType = {
     posts: Array<postsType>
-    newPostText:string
-    dispatch: any
+    newPostText: string
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
 }
 
 function MyPosts(props: profilePagePropsType) {
@@ -14,12 +14,12 @@ function MyPosts(props: profilePagePropsType) {
                                                       likesCount={el.likesCount} /*id={el.id}*//>)
     const newPostRef = React.createRef<HTMLTextAreaElement>();
     const addPost = () => {
-        props.dispatch(addPostA())
+        props.addPost()
     }
-const onChangeHandler=()=> {
-    const newText=newPostRef.current?.value
-    props.dispatch(changePostA(newText!))
-}
+    const onChangeHandler = () => {
+        const newText = newPostRef.current?.value
+        props.updateNewPostText(newText!)
+    }
 
     return (
         <div className={s.postsBlock}>

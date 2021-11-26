@@ -6,12 +6,12 @@ import {ActionsTypes, InitialStateType, sendMessageA, updateMessageA} from "../.
 
 
 type DialogsPagePropsType = {
-    dialogsPage:InitialStateType
-    dispatch:(action:ActionsTypes)=>void
+    dialogsPage: InitialStateType
+    dispatch: (action: ActionsTypes) => void
 }
 
 
-const Dialogs = ({dialogsPage,...props}:DialogsPagePropsType) => {
+const Dialogs = ({dialogsPage, ...props}: DialogsPagePropsType) => {
 
     const DialogsElement = dialogsPage.dialogs.map(el =>
         <DialogsItem id={el.id} name={el.name}/>
@@ -20,7 +20,7 @@ const Dialogs = ({dialogsPage,...props}:DialogsPagePropsType) => {
     const MessageElement = dialogsPage.messages.map(mes =>
         < Message id={mes.id} message={mes.message}/>
     )
-    const newMessageBody =dialogsPage.newMessageBody
+    const newMessageBody = dialogsPage.newMessageBody
     const onSendMessageClick = () => {
         props.dispatch(sendMessageA())
     }
