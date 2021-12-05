@@ -1,8 +1,5 @@
-export type postsType = {
-    message: string,
-    likesCount: number
-}
-type postType = {
+
+export type postType = {
     message: string,
     likesCount: number
 } //тип посттайп
@@ -23,7 +20,7 @@ let initialState: InitialStateType = {
 
 const profileReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     if (action.type === 'ADD-POST') {
-        const newPost: postsType = {
+        const newPost: postType = {
             message: state.newPostText,
             likesCount: 0
         }

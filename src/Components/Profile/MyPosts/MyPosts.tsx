@@ -5,8 +5,8 @@ import Post, {postsType} from "./Post/Post";
 export type profilePagePropsType = {
     posts: Array<postsType>
     newPostText: string
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    addPostText: () => void
+    onChangeHandler: (newText: string) => void
 }
 
 function MyPosts(props: profilePagePropsType) {
@@ -14,11 +14,11 @@ function MyPosts(props: profilePagePropsType) {
                                                       likesCount={el.likesCount} /*id={el.id}*//>)
     const newPostRef = React.createRef<HTMLTextAreaElement>();
     const addPost = () => {
-        props.addPost()
+        props.addPostText()
     }
     const onChangeHandler = () => {
         const newText = newPostRef.current?.value
-        props.updateNewPostText(newText!)
+        props.onChangeHandler(newText!)
     }
 
     return (

@@ -1,5 +1,3 @@
-import {addPostA, changePostA} from "./profileReducer";
-
 type dialogsType = {
     id: number,
     name: string
@@ -34,16 +32,21 @@ let initialState:InitialStateType = {
 
 
 const dialogsReducer = (state:InitialStateType=initialState, action: ActionsTypes):InitialStateType => {
+
+    let stateCopy = {...state}
+    stateCopy.messages=[...state.messages]
+    stateCopy.dialogs=[...state.dialogs]
+
     if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {
-        state.newMessageBody = action.body;
+        stateCopy.newMessageBody = action.body;
     }
 
     if (action.type === 'SEND-NEW-MESSAGE') {
-        let body = state.newMessageBody
-        state.messages.push({id: 6, message: body})
-        state.newMessageBody = ''
+        let body = stateCopy.newMessageBody
+        stateCopy.messages.push({id: 6, message: body})
+        stateCopy.newMessageBody = ''
     }
-    return state
+    return stateCopy
 }
 export type ActionsTypes =
      ReturnType<typeof sendMessageA>
