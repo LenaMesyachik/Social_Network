@@ -1,4 +1,3 @@
-
 export type postType = {
     message: string,
     likesCount: number
@@ -20,19 +19,23 @@ let initialState: InitialStateType = {
 
 const profileReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     let stateCopy = {...state}
-    if (action.type === 'ADD-POST') {
-        const newPost: postType = {
-            message: state.newPostText,
-            likesCount: 0
-        }
-        stateCopy.posts = [...state.posts]
-        stateCopy.posts.push(newPost)
-        stateCopy.newPostText = ''
+    switch (action.type) {
+        case 'ADD-POST':
+            const newPost: postType = {
+                message: state.newPostText,
+                likesCount: 0
+            }
+            stateCopy.posts = [...state.posts]
+            stateCopy.posts.push(newPost)
+            stateCopy.newPostText = ''
+            return stateCopy
 
-    } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-        stateCopy.newPostText = action.newText
+         case 'UPDATE-NEW-POST-TEXT':
+            stateCopy.newPostText = action.newText
+            return stateCopy
+        default: return stateCopy
+
     }
-    return stateCopy
 }
 
 export type ActionsTypes =

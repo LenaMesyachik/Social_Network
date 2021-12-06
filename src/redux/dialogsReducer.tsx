@@ -34,19 +34,22 @@ let initialState:InitialStateType = {
 const dialogsReducer = (state:InitialStateType=initialState, action: ActionsTypes):InitialStateType => {
 
     let stateCopy = {...state}
-    stateCopy.messages=[...state.messages]
-    stateCopy.dialogs=[...state.dialogs]
+    stateCopy.messages = [...state.messages]
+    stateCopy.dialogs = [...state.dialogs]
 
-    if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {
-        stateCopy.newMessageBody = action.body;
-    }
+    switch (action.type) {
+        case   'UPDATE-NEW-MESSAGE-BODY':
+            stateCopy.newMessageBody = action.body;
+            return stateCopy
 
-    if (action.type === 'SEND-NEW-MESSAGE') {
-        let body = stateCopy.newMessageBody
-        stateCopy.messages.push({id: 6, message: body})
-        stateCopy.newMessageBody = ''
+        case'SEND-NEW-MESSAGE':
+            let body = stateCopy.newMessageBody
+            stateCopy.messages.push({id: 6, message: body})
+            stateCopy.newMessageBody = ''
+            return stateCopy
+        default:
+            return stateCopy
     }
-    return stateCopy
 }
 export type ActionsTypes =
      ReturnType<typeof sendMessageA>
