@@ -5,6 +5,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import Profile from "./Components/Profile/Profile";
 import {Route} from "react-router-dom";
 import DialogsContainer from "./Components/Dialogs/DialogsContanier";
+import UsersContainer from "./Components/Users/UsersContainer";
 
 /*export type AppPropsType = {
     store: Store<RootReducerType, AllActionsCreatorType>
@@ -20,9 +21,9 @@ export const App = () => {
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
-                <Route path='/dialogs'
-                       render={() => <DialogsContainer/>}/>
+                <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                 <Route path='/profile' render={() => <Profile/>}/>
+                <Route path='/users' render={() => <UsersContainer/>}/>
             </div>
         </div>
 
