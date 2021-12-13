@@ -3,23 +3,26 @@ export type InitialStateType = {
 }
 export type UserType = {
     id: number,
-    photoUrl: string,
+    photos: {
+        small:null,
+        large: null,
+    }
     followed: boolean,
-    fullName: string,
+    name: string,
     status: string,
-    location: locationType
+    /*location: locationType*/
 }
 
-type locationType = {
+/*type locationType = {
     city: string,
     country: string
-}
+}*/
 const initialState = {
     users: [
-        {id: 1,photoUrl:'https://www.film.ru/sites/default/files/people/1455889-881763.jpg' , followed: true, fullName: 'Anna', status: 'good mood', location: {city: 'Minsk', country: 'Belarus'}},
-        {id: 2,photoUrl:'https://www.film.ru/sites/default/files/people/1455889-881763.jpg', followed: false, fullName: 'Lena', status: 'can fly', location: {city: 'Moscow', country: 'Russia'}},
-        {id: 3,photoUrl:'https://www.film.ru/sites/default/files/people/1455889-881763.jpg', followed: true, fullName: 'Marina', status: 'live in my head', location: {city: 'Kiev', country: 'Ukraine'}},
-        {id: 4,photoUrl:'https://www.film.ru/sites/default/files/people/1455889-881763.jpg', followed: false, fullName: 'Mark', status: 'sorry', location: {city: 'London', country: 'UK'}}
+        /* {id: 1,photoUrl:'https://www.film.ru/sites/default/files/people/1455889-881763.jpg' , followed: true, fullName: 'Anna', status: 'good mood', location: {city: 'Minsk', country: 'Belarus'}},
+         {id: 2,photoUrl:'https://www.film.ru/sites/default/files/people/1455889-881763.jpg', followed: false, fullName: 'Lena', status: 'can fly', location: {city: 'Moscow', country: 'Russia'}},
+         {id: 3,photoUrl:'https://www.film.ru/sites/default/files/people/1455889-881763.jpg', followed: true, fullName: 'Marina', status: 'live in my head', location: {city: 'Kiev', country: 'Ukraine'}},
+         {id: 4,photoUrl:'https://www.film.ru/sites/default/files/people/1455889-881763.jpg', followed: false, fullName: 'Mark', status: 'sorry', location: {city: 'London', country: 'UK'}}*/
     ]
 }
 
@@ -31,7 +34,7 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
                 ...state,
                 users: state.users.map(u => {
                         if (u.id === action.userId) {
-                            return {...u, followed:true}
+                            return {...u, followed: true}
                         }
                         return u
                     }
@@ -42,7 +45,7 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
                 ...state,
                 users: state.users.map(u => {
                         if (u.id === action.userId) {
-                            return {...u, followed:false}
+                            return {...u, followed: false}
                         }
                         return u
                     }
@@ -51,14 +54,14 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
         case "SET-USERS":
             return {
                 ...state,
-                users: [...state.users,...action.users]
+                users: [...state.users, ...action.users]
             }
         default:
             return state
     }
-    }
+}
 
-export type ActionsTypes = ReturnType<typeof followAC> | ReturnType<typeof unfollowAC> |  ReturnType<typeof setUsersAC>
+export type ActionsTypes = ReturnType<typeof followAC> | ReturnType<typeof unfollowAC> | ReturnType<typeof setUsersAC>
 
 
 export const followAC = (userId: number) => ({type: "FOLLOW", userId} as const)
