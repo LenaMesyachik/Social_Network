@@ -3,25 +3,26 @@ import axios from "axios";
 import s from './Users.module.css'
 import {UserType} from "../../redux/usersReducer";
 
-type UsersPropsType={
-    users:Array<UserType>,
-    follow:(userId:number)=>void,
-    unfollow:(userId:number)=>void
-    setUsers:(users: UserType[])=>void
+type UsersPropsType = {
+    users: Array<UserType>,
+    follow: (userId: number) => void,
+    unfollow: (userId: number) => void
+    setUsers: (users: UserType[]) => void
 }
 
 class Users extends React.Component<UsersPropsType> {
-    getUsers = () => {
-        if (this.props.users.length === 0) {
+    constructor(props:UsersPropsType) {
+        super(props);
+      /*  if (this.props.users.length === 0)*/
             axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
                 this.props.setUsers(response.data.items)
-            })
-        }
-    }
+            })}
+
+
 
     render() {
         return <div>
-            <button onClick={this.getUsers}> Get users</button>
+           {/* <button onClick={this.getUsers}> Get users</button>*/}
             {
                 this.props.users.map(u => <div key={u.id}>
                 <span>
@@ -41,7 +42,8 @@ class Users extends React.Component<UsersPropsType> {
                 <div>{'u.location.city'}</div>
                 </span>
                 </span>
-                </div>)}
+                </div>)
+            }
         </div>
 
     }
