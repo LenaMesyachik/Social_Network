@@ -1,5 +1,5 @@
 import React from 'react';
-import {UserType} from "../../redux/usersReducer";
+import {InitialStateType, UserType} from "../../redux/usersReducer";
 import s from './Users.module.css'
 import axios from "axios";
 
@@ -12,16 +12,18 @@ export type UsersPropsType={
 }
 export const  Users = (props:UsersPropsType) => {
 
-    if (props.users.length === 0) {
+    if (props.users.length !== 0) {
+        debugger
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response =>{
             debugger
-        props.setUsers([])})
+        props.setUsers(response.data.items)
+        })
     }
-
+    console.log('USER')
             return <div>
         { props.users.map(u=><div key={u.id}>
             <span>
-                <div className={s.item} > <img  src = {u.photoUrl}/> </div>
+                <div className={s.item} > <img src = {u.photoUrl}/> </div>
                 <div>
                     {u.followed ? <button onClick={()=>{props.unfollow(u.id)}}>Unfollow</button> :
                         <button onClick={()=>{props.follow(u.id)}}>Follow</button> }

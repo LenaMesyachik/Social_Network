@@ -1,14 +1,13 @@
 import React from "react";
 import {connect} from "react-redux";
 import {Users} from "./Users";
-import {AllActionsCreatorType, RootReducerType} from "../../redux/redux-store";
+import {RootReducerType} from "../../redux/redux-store";
 import {followAC, InitialStateType, setUsersAC, unfollowAC, UserType} from "../../redux/usersReducer";
+import {Dispatch} from "redux";
 
 
-export type MapStateToPropsType={
-    users: InitialStateType
+export type MapStateToPropsType=InitialStateType
 
-}
 /*export type MapDispatchToPropsType={
     sendNewMessage:()=>{}
     updateMessageBod:(body:string)=>{}
@@ -19,7 +18,7 @@ const mapStateToProps = (state:RootReducerType):InitialStateType=>{
     }
 }
 
-const mapDispatchToProps = (dispatch:(action:AllActionsCreatorType)=> void)=>{
+const mapDispatchToProps = (dispatch:Dispatch)=>{
     return {
         follow: (userId:number)=>{
             dispatch(followAC(userId))
