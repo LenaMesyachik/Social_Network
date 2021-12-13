@@ -11,14 +11,15 @@ export type UsersPropsType={
     setUsers:(users: UserType[])=>void
 }
 export const  Users = (props:UsersPropsType) => {
-
+    const getUsers = () => {
     if (props.users.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response =>{
+       axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response =>{
         props.setUsers(response.data.items)
         })
-    }
+    }}
     console.log('USER')
             return <div>
+                <button onClick={getUsers}>Get users</button>
         { props.users.map(u=><div key={u.id}>
             <span>
                 <div className={s.item} > <img src = {u.photos.small !== null ? u.photos.small : 'userPhoto' }  /> </div>
