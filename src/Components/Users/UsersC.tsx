@@ -14,11 +14,15 @@ class Users extends React.Component<UsersPropsType> {
     constructor(props:UsersPropsType) {
         super(props);
       /*  if (this.props.users.length === 0)*/
-            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+           /* axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
                 this.props.setUsers(response.data.items)
-            })}
+            }
+            )*/}
 
-
+  componentDidMount() {  /*  if (this.props.users.length === 0)*/
+      axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+          this.props.setUsers(response.data.items)
+  })}
 
     render() {
         return <div>
