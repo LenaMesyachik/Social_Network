@@ -18,7 +18,10 @@ export const  Users = (props:UsersPropsType) => {
         })
     }}
     console.log('USER')
+
+
             return <div>
+
                 <button onClick={getUsers}>Get users</button>
         { props.users.map(u=><div key={u.id}>
             <span>
