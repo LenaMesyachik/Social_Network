@@ -25,22 +25,22 @@ class Users extends React.Component<UsersPropsType> {
           this.props.setUsers(response.data.items)
       }
       )}*/
-/*
     componentDidMount() {
-        debugger/!*  if (this.props.users.length === 0)*!/
+       /*  if (this.props.users.length === 0)*/
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
             this.props.setUsers(response.data.items)
+           /* this.props.setTotalUserCount(response.data.totalUserCount)*/
         })
-    }*/
-
+    }
     onPageChanged = (pageNumber:number) => {this.props.setCurrentPage(pageNumber)
+
     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
-this.props.setUsers(response.data.items)
-this.props.setTotalUserCount(response.data.totalUserCount)
-})}
-    //меняем карент пэйдж на пэйдж намбер, чтоюы шел запрос на актуальную стр
+        this.props.setUsers(response.data.items)
+        this.props.setTotalUserCount(response.data.totalUserCount)
+    })}   //меняем карент пэйдж на пэйдж намбер, чтоюы шел запрос на актуальную стр
 
     render() {
+        debugger
         const pagesCount = Math.ceil(this.props.totalUserCount / this.props.pageSize)
         let pages = []
         for (let i = 1; i <= pagesCount; i++) {

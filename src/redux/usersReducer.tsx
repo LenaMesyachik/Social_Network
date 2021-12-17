@@ -24,7 +24,7 @@ export type UserType = {
 const initialState = {
     users: [],
     pageSize: 5,
-    totalUserCount: 16381,
+    totalUserCount: 0,
     currentPage: 3
 }
 

@@ -42,11 +42,11 @@ const mapDispatchToProps = (dispatch:Dispatch)=>{
             dispatch(setUsersAC(users))
         },
         setCurrentPage:(pageNumber:number) => {
-            debugger
+
             dispatch(setCurrentPageAC(pageNumber))
         },
         setTotalUserCount:(totalUserCount:number) => {
-            debugger
+
             dispatch(setTotalUserCountAC(totalUserCount))
         }
     }
