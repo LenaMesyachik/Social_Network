@@ -41,7 +41,7 @@ class UsersС extends React.Component<UsersPropsType> {
     })}   //меняем карент пэйдж на пэйдж намбер, чтоюы шел запрос на актуальную стр
 
     render() {
-
+        
         const pagesCount = Math.ceil(this.props.totalUserCount / this.props.pageSize)
         let pages = []
         for (let i = 1; i <= pagesCount; i++) {
