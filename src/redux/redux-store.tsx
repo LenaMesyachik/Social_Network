@@ -1,7 +1,13 @@
 import {combineReducers, createStore, Store} from "redux";
 import profileReducer, {addPostA, changePostA} from "./profileReducer";
 import dialogsReducer, {sendMessageA, updateMessageA} from "./dialogsReducer";
-import usersReducer, {followAC, setUsersAC, unfollowAC} from "./usersReducer";
+import usersReducer, {
+    followAC,
+    setCurrentPageAC,
+    setTotalUserCountAC,
+    setUsersAC, toggleIsFetchingAC,
+    unfollowAC
+} from "./usersReducer";
 
 
 let rootReducer = combineReducers({
@@ -19,6 +25,10 @@ export type AllActionsCreatorType =
     | ReturnType<typeof followAC>
     | ReturnType<typeof unfollowAC>
     | ReturnType<typeof setUsersAC>
+    | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setTotalUserCountAC>
+    | ReturnType<typeof toggleIsFetchingAC>
+
 
 
 let store: Store<RootReducerType, AllActionsCreatorType> = createStore(rootReducer);

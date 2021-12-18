@@ -1,6 +1,7 @@
 import React from "react";
 import s from './Users.module.css'
 import {UserType} from "../../redux/usersReducer";
+import userPhoto from '../../assets/img/user.png'
 
 
 type UsersPropsType = {

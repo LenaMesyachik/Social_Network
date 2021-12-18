@@ -6,13 +6,15 @@ import {
     InitialStateType,
     setCurrentPageAC,
     setTotalUserCountAC,
-    setUsersAC,
+    setUsersAC, toggleIsFetchingAC,
     unfollowAC,
     UserType
 } from "../../redux/usersReducer";
 import {Dispatch} from "redux";
 import axios from "axios";
 import {UsersFunc} from "./UsersFunc";
+import preloader from './../../assets/spinner-icon-gif-28.jpg'
+import s from "./Users.module.css";
 
 type UsersPropsType = {
     users: Array<UserType>,
@@ -23,7 +25,9 @@ type UsersPropsType = {
     pageSize: number,
     currentPage: number,
     setCurrentPage: (currentPage: number) => void,
-    setTotalUserCount:(totalUserCount:number) => void
+    setTotalUserCount: (totalUserCount: number) => void
+    isFetching: boolean,
+    toggleIsFetching:(isFetching:boolean) => void
 }
 
 class UsersСAPI extends React.Component<UsersPropsType> {
@@ -35,68 +39,88 @@ class UsersСAPI extends React.Component<UsersPropsType> {
       }
       )}*/
     componentDidMount() {
-        debugger
+        this.props.toggleIsFetching(true)
         /*  if (this.props.users.length === 0)*/
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
             this.props.setUsers(response.data.items)
             this.props.setTotalUserCount(response.data.totalCount)
+            this.props.toggleIsFetching(false)
 
         })
     }
-    onPageChanged = (pageNumber:number) => {this.props.setCurrentPage(pageNumber)
 
+    onPageChanged = (pageNumber: number) => {
+        this.props.setCurrentPage(pageNumber)
+        this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
-            debugger
             this.props.setUsers(response.data.items)
             this.props.setTotalUserCount(response.data.totalCount)
-        })}   //меняем карент пэйдж на пэйдж намбер, чтоюы шел запрос на актуальную стр
+            this.props.toggleIsFetching(false)
+        })
+    }   //меняем карент пэйдж на пэйдж намбер, чтоюы шел запрос на актуальную стр
 
     render() {
-        debugger
-
         const pagesCount = Math.ceil(this.props.totalUserCount / this.props.pageSize)
         let pages = []
         for (let i = 1; i <= pagesCount; i++) {
             pages.push(i)
         }
         return (
-            <UsersFunc users={this.props.users} follow={this.props.follow} unfollow={this.props.unfollow} setUsers={this.props.setUsers} totalUserCount={this.props.totalUserCount} pageSize={this.props.pageSize}
-                       currentPage={this.props.currentPage} setCurrentPage={this.props.setCurrentPage} setTotalUserCount={this.props.setTotalUserCount} onPageChanged={this.onPageChanged}/>
-        )}}
+            <>
 
-const mapStateToProps = (state:RootReducerType):InitialStateType=>{
+                {this.props.isFetching ?
+                    <div className={s.item}>
+                        <img  src={preloader}/>
+                    </div>
+                    : null}
+                <UsersFunc users={this.props.users} follow={this.props.follow} unfollow={this.props.unfollow}
+                           setUsers={this.props.setUsers} totalUserCount={this.props.totalUserCount}
+                           pageSize={this.props.pageSize}
+                           currentPage={this.props.currentPage} setCurrentPage={this.props.setCurrentPage}
+                           setTotalUserCount={this.props.setTotalUserCount} onPageChanged={this.onPageChanged}/>
+            </>
+        )
+    }
+}
+
+const mapStateToProps = (state: RootReducerType): InitialStateType => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
         totalUserCount: state.usersPage.totalUserCount,
-        currentPage: state.usersPage. currentPage,
+        currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching
     }
 }
 
-const mapDispatchToProps = (dispatch:Dispatch)=>{
+const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        follow: (userId:number)=>{
+        follow: (userId: number) => {
             dispatch(followAC(userId))
         },
-        unfollow: (userId:number)=>{
+        unfollow: (userId: number) => {
             dispatch(unfollowAC(userId))
         },
-        setUsers: (users: UserType[])=>{
+        setUsers: (users: UserType[]) => {
             dispatch(setUsersAC(users))
         },
-        setCurrentPage:(pageNumber:number) => {
+        setCurrentPage: (pageNumber: number) => {
 
             dispatch(setCurrentPageAC(pageNumber))
         },
-        setTotalUserCount:(totalUserCount:number) => {
+        setTotalUserCount: (totalUserCount: number) => {
 
             dispatch(setTotalUserCountAC(totalUserCount))
+        },
+        toggleIsFetching: (isFetching: boolean) => {
+
+            dispatch(toggleIsFetchingAC(isFetching))
         }
     }
 
 }
-const  UserContainer = connect(mapStateToProps, mapDispatchToProps)(UsersСAPI)
-export default  UserContainer;
+const UserContainer = connect(mapStateToProps, mapDispatchToProps)(UsersСAPI)
+export default UserContainer;
 
 
 
