@@ -56,4 +56,3 @@ class UsersСAPI extends React.Component<UsersPropsType> {
 }
 
 
-export default UsersСAPI;
