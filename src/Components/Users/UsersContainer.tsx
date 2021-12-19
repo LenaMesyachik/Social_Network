@@ -2,19 +2,18 @@ import React from "react";
 import {connect} from "react-redux";
 import {RootReducerType} from "../../redux/redux-store";
 import {
-    followAC,
+    follow,
     InitialStateType,
-    setCurrentPageAC,
-    setTotalUserCountAC,
-    setUsersAC, toggleIsFetchingAC,
-    unfollowAC,
+    setCurrentPage,
+    setTotalUserCount,
+    setUsers,
+    toggleIsFetching,
+    unfollow,
     UserType
 } from "../../redux/usersReducer";
-import {Dispatch} from "redux";
 import axios from "axios";
 import {UsersFunc} from "./UsersFunc";
-import preloader from './../../assets/spinner-icon-gif-28.jpg'
-import s from "./Users.module.css";
+import {Preloader} from "./Preloader";
 
 type UsersPropsType = {
     users: Array<UserType>,
@@ -69,9 +68,7 @@ class UsersСAPI extends React.Component<UsersPropsType> {
             <>
 
                 {this.props.isFetching ?
-                    <div className={s.item}>
-                        <img  src={preloader}/>
-                    </div>
+                    <Preloader/>
                     : null}
                 <UsersFunc users={this.props.users} follow={this.props.follow} unfollow={this.props.unfollow}
                            setUsers={this.props.setUsers} totalUserCount={this.props.totalUserCount}
@@ -93,7 +90,7 @@ const mapStateToProps = (state: RootReducerType): InitialStateType => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
+/*const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         follow: (userId: number) => {
             dispatch(followAC(userId))
@@ -118,8 +115,15 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
         }
     }
 
-}
-const UserContainer = connect(mapStateToProps, mapDispatchToProps)(UsersСAPI)
+}*/
+const UserContainer = connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setUsers,
+    setCurrentPage,
+    setTotalUserCount,
+    toggleIsFetching})(UsersСAPI) //ключ - функция-колбэк и такое же значение- экшн криетор поэтому записываем одним словом
+
 export default UserContainer;
 
 
