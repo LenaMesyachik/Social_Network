@@ -41,9 +41,10 @@ class UsersСAPI extends React.Component<UsersPropsType> {
         this.props.toggleIsFetching(true)
         /*  if (this.props.users.length === 0)*/
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items)
             this.props.setTotalUserCount(response.data.totalCount)
-            this.props.toggleIsFetching(false)
+
 
         })
     }
@@ -52,9 +53,9 @@ class UsersСAPI extends React.Component<UsersPropsType> {
         this.props.setCurrentPage(pageNumber)
         this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+            this.props.toggleIsFetching(false)
             this.props.setUsers(response.data.items)
             this.props.setTotalUserCount(response.data.totalCount)
-            this.props.toggleIsFetching(false)
         })
     }   //меняем карент пэйдж на пэйдж намбер, чтоюы шел запрос на актуальную стр
 
@@ -80,7 +81,7 @@ class UsersСAPI extends React.Component<UsersPropsType> {
     }
 }
 
-const mapStateToProps = (state: RootReducerType): InitialStateType => {
+const mapStateToProps = (state: RootReducerType) => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,

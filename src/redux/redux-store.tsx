@@ -1,5 +1,5 @@
 import {combineReducers, createStore, Store} from "redux";
-import profileReducer, {addPostA, changePostA} from "./profileReducer";
+import profileReducer, {addPostA, changePostA, setUsersProfile} from "./profileReducer";
 import dialogsReducer, {sendMessageA, updateMessageA} from "./dialogsReducer";
 import usersReducer, {
     follow,
@@ -28,7 +28,7 @@ export type AllActionsCreatorType =
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUserCount>
     | ReturnType<typeof toggleIsFetching>
-
+    | ReturnType<typeof setUsersProfile>
 
 
 let store: Store<RootReducerType, AllActionsCreatorType> = createStore(rootReducer);
