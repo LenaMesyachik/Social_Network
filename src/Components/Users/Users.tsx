@@ -11,13 +11,13 @@ export type UsersPropsType={
     setUsers:(users: UserType[])=>void
 }
 export const  Users = (props:UsersPropsType) => {
+    console.log(userPhoto)
     const getUsers = () => {
     if (props.users.length === 0) {
        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response =>{
         props.setUsers(response.data.items)
         })
     }}
-    console.log('USER')
 
 
             return <div>
@@ -25,7 +25,7 @@ export const  Users = (props:UsersPropsType) => {
                 <button onClick={getUsers}>Get users</button>
         { props.users.map(u=><div key={u.id}>
             <span>
-                <div className={s.item} > <img src = {u.photos.small !== null ? u.photos.small : userPhoto }  /> </div>
+                <div className={s.item} > <img src={u.photos.small !== null ? u.photos.small : userPhoto }  /> </div>
                 <div>
                     {u.followed ? <button onClick={()=>{props.unfollow(u.id)}}>Unfollow</button> :
                         <button onClick={()=>{props.follow(u.id)}}>Follow</button> }

@@ -41,7 +41,7 @@ export const UsersFunc = (props: UsersPropsType) => {
                 <span>
                    <NavLink to={'/profile/' + u.id}>
                 <div className={s.item}>
-                    <img src={u.photos.small !== null ? u.photos.small : 'userPhoto'}/>
+                    <img src={u.photos.small !== null ? u.photos.small : userPhoto}/>
                 </div>
                    </NavLink>
                 <div>

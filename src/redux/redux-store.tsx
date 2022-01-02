@@ -33,4 +33,9 @@ export type AllActionsCreatorType =
 
 let store: Store<RootReducerType, AllActionsCreatorType> = createStore(rootReducer);
 
+// @ts-ignore
+window.store = store
+
+
+
 export default store;

@@ -9,10 +9,10 @@ export type ProfileInfoPropsType = {
     profile:  ProfileType,
     }
 export const ProfileInfo = ({profile}: ProfileInfoPropsType) => {
-    console.log( profile)
     if (!profile){ //profile===null/underfined
-        return <Preloader/>
-        console.log( profile)}
+        debugger
+        return <Preloader/> }
+console.log( 'jjjjj')
 
     return (
 
@@ -24,7 +24,7 @@ export const ProfileInfo = ({profile}: ProfileInfoPropsType) => {
             <div className={s.descriptionBlock}>
                 <img src = {profile.photos && profile.photos.large } alt={'userPhoto'}/>
                     <div> {profile.fullName}</div>
-                    <div> {profile.contacts}</div>
+                    <div> {profile.contacts.github}</div>
                     <div> {profile.lookingForAJob}</div>
             </div>
         </div>
