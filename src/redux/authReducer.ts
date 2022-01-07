@@ -1,4 +1,4 @@
-import {follow} from "./usersReducer";
+
 
 export type InitialStateType = {}
 
@@ -35,5 +35,5 @@ export type ActionsTypes = ReturnType<typeof setUserDataAC>
 }*/
 export const setUserDataAC = ( data: {id: null, email: null, login: null}) => { return {type: 'SET-USER-DATA', data} as const }
 
-    export const toggleIsFetching = (isFetching: boolean) => ({type: "TOGGLE-IS-FETCHING", isFetching} as const)
+  //  export const toggleIsFetching = (isFetching: boolean) => ({type: "TOGGLE-IS-FETCHING", isFetching} as const)
 
