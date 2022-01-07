@@ -24,7 +24,7 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
     }
 }
 
-export type ActionsTypes = ReturnType<typeof setUserDataAC>
+export type ActionsTypes = ReturnType<typeof setAuthUserData>
 /*type setUserDataACType = {
     type: 'SET-USER-DATA',
     data: {
@@ -33,7 +33,7 @@ export type ActionsTypes = ReturnType<typeof setUserDataAC>
         login: null,
     }
 }*/
-export const setUserDataAC = ( data: {id: null, email: null, login: null}) => { return {type: 'SET-USER-DATA', data} as const }
+export const setAuthUserData = ( id: null, email: null, login: null) => { return {type: 'SET-USER-DATA',data :{id, email, login}} as const }
 
   //  export const toggleIsFetching = (isFetching: boolean) => ({type: "TOGGLE-IS-FETCHING", isFetching} as const)
 
