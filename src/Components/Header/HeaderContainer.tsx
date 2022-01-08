@@ -7,6 +7,8 @@ import {RootReducerType} from "../../redux/redux-store";
 
 type HeaderPropsType = {
     setAuthUserData: (id: null | number,  email: null | string, login: null | string, isAuth: false) => void
+    isAuth:boolean,
+    login:null | string
 }
 type AuthResponseType = {
     data: { id: number, email: string, login: string  },
@@ -30,9 +32,12 @@ class HeaderContainer extends React.Component <HeaderPropsType> {
     }
 
     render() {
-        return <Header  />
+        return <Header {...this.props} setAuthUserData={this.props.setAuthUserData} isAuth = {this.props.isAuth} login={this.props.login} />
     }
 }
 
-
-export default connect(null, {setAuthUserData})(HeaderContainer)
+export const mapStateToProps = (state:RootReducerType) => ({
+    isAuth: state.auth.isAuth,
+    login: state.auth.login
+})
+export default connect(mapStateToProps, {setAuthUserData})(HeaderContainer)
