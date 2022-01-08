@@ -5,6 +5,11 @@ import {connect} from "react-redux";
 import {setAuthUserData} from "../../redux/authReducer";
 import {RootReducerType} from "../../redux/redux-store";
 
+
+export enum ResultCodeEnum {
+    Success,
+    Error = 1
+}
 type HeaderPropsType = {
     setAuthUserData: (id: null | number,  email: null | string, login: null | string, isAuth: false) => void
     isAuth:boolean,
@@ -12,7 +17,7 @@ type HeaderPropsType = {
 }
 type AuthResponseType = {
     data: { id: number, email: string, login: string  },
-    resultCode: number,
+    resultCode: ResultCodeEnum,
     messages: Array<string>
 }
 
@@ -23,7 +28,7 @@ class HeaderContainer extends React.Component <HeaderPropsType> {
             withCredentials: true
         }).then((response) => {
             debugger
-            if (response.data.resultCode === 0) {
+            if (response.data.resultCode === ResultCodeEnum.Success) {
                 debugger
                 let {id, email, login} = response.data.data
                 this.props.setAuthUserData(id, email, login, false)
