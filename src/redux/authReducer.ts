@@ -1,22 +1,23 @@
 
 
-export type InitialStateType = {}
+/*export type InitialStateType  = {}*/
 
 const initialState = {
-    id: null,
-    email: null,
-    login: null,
-    isFetching: false
+    id: null as (number|null) ,
+    email: null as string | null,
+    login: null as string | null,
+    isAuth: false
 
 }
+export type InitialStateType = typeof initialState
 
 
-export const authReducer = (state: InitialStateType = initialState, action: ActionsTypes) => {
+export const authReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case "SET-USER-DATA":
             return {
                 ...state,
-                ...action.data
+                ...action.data,
             }
 
         default:
@@ -33,7 +34,8 @@ export type ActionsTypes = ReturnType<typeof setAuthUserData>
         login: null,
     }
 }*/
-export const setAuthUserData = ( id: null, email: null, login: null) => { return {type: 'SET-USER-DATA',data :{id, email, login}} as const }
+export const setAuthUserData = ( id: null | number,  email: null | string, login: null | string, isAuth: false
+) => { return {type: 'SET-USER-DATA',data :{id, email, login}} as const }
 
   //  export const toggleIsFetching = (isFetching: boolean) => ({type: "TOGGLE-IS-FETCHING", isFetching} as const)
 
